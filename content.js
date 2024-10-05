@@ -1,5 +1,7 @@
+console.log("ChatGPT Markdown Converter: content.js injetado");
 // Função para converter HTML para Markdown
 function htmlToMarkdown(element) {
+    console.log("Convertendo HTML para Markdown...");
     let markdown = "";
 
     element.querySelectorAll('*').forEach(node => {
@@ -30,8 +32,10 @@ function htmlToMarkdown(element) {
         }
     });
 
+    console.log(`Markdown convertido: \n${markdown}`);
     return markdown.trim();
 }
+
 
 // Função para criar o botão "Copiar"
 function createCopyButton(markdown) {
@@ -62,19 +66,27 @@ function createCopyButton(markdown) {
 
 // Função para processar as respostas
 function processResponses() {
+    console.log("Processando respostas...");
     // Selecione os elementos que contêm as respostas do ChatGPT
     const responses = document.querySelectorAll('div.markdown.prose'); // Ajuste o seletor conforme necessário
+    console.log(`Encontradas ${responses.length} respostas`);
 
-    responses.forEach(response => {
+    responses.forEach((response, index) => {
         // Verifique se já adicionou o botão
         if (!response.querySelector('.copy-button')) {
+            console.log(`Adicionando botão "Copiar" à resposta ${index + 1}`);
             const markdown = htmlToMarkdown(response);
+            console.log(`Markdown gerado para resposta ${index + 1}: \n${markdown}`);
             const button = createCopyButton(markdown);
             button.classList.add('copy-button');
             response.appendChild(button);
+            console.log(`Botão "Copiar" adicionado à resposta ${index + 1}`);
+        } else {
+            console.log(`Botão "Copiar" já existe na resposta ${index + 1}`);
         }
     });
 }
+
 
 // Observador para detectar mudanças no DOM
 const observer = new MutationObserver((mutations) => {

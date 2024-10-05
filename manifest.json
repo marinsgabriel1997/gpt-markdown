@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT to Markdown Converter",
+  "version": "1.0",
+  "description": "Converte respostas do ChatGPT para Markdown e adiciona um botão 'Copiar'.",
+  "permissions": [
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://chat.openai.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
